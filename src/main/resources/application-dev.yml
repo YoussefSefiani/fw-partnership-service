@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/db_fw_offer_service
+    username: postgres
+    password: root
+  jpa:
+    properties:
+      hibernate:
+        globally_quoted_identifiers: 'true'
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      show-sql: 'true'
+      ddl-auto: update
+  application:
+    name: fw-offer-service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://user:finalwork@localhost:8761/eureka/
+  instance:
+    hostname: localhost
+    secure-port-enabled: true
+    non-secure-port-enabled: false
+  password: ${USER_PASSWORD:password}
+security:
+  user:
+    password: ${eureka.password}
+feign:
+  httpclient:
+    disable-ssl-validation: true
+
+server:
+  error:
+    include-message: always
+  port: 8082
