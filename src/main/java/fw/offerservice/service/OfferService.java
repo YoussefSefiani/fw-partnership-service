@@ -64,4 +64,13 @@ public class OfferService {
         offer.setStatus(Status.DECLINED);
         offerRepository.save(offer);
     }
+
+    public List<Offer> getRequestedOffers() {
+        return offerRepository.findByStatus(Status.REQUESTED);
+    }
+
+    public List<Offer> getUpcomingEvents() {
+        return offerRepository.findByStatusNot(Status.REQUESTED);
+
+    }
 }

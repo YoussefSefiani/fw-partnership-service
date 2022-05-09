@@ -40,6 +40,16 @@ public class OfferController {
         offerService.updateInfluencer(offerId, offer);
     }
 
+    @GetMapping(path = "/requested")
+    public List<Offer> getRequestedOffers() {
+        return offerService.getRequestedOffers();
+    }
+
+    @GetMapping(path = "/upcoming")
+    public List<Offer> getUpcomingEvents() {
+        return offerService.getUpcomingEvents();
+    }
+
     @GetMapping(path = "/accept/{offerId}")
     public void acceptOffer(@PathVariable("offerId") Long offerId) {
         offerService.acceptOffer(offerId);
