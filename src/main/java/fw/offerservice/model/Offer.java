@@ -36,13 +36,13 @@ public class Offer {
     private List<SocialMediaDetails> socialMediaDetails;
 
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(style = "yyyy:dd:MM")
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy:dd:MM")
+    @DateTimeFormat(style = "yyyy-MM-dd")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date startDate;
 
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(style = "yyyy:dd:MM")
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy:dd:MM")
+    @DateTimeFormat(style = "yyyy-MM-dd")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date endDate;
 
     private String file;
