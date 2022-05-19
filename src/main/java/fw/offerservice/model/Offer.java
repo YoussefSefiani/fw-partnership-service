@@ -45,6 +45,6 @@ public class Offer {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy:dd:MM")
     private Date endDate;
 
-    private String invoice;
+    private String file;
 
 }

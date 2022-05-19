@@ -50,7 +50,7 @@ public class OfferService {
                         String.format("Offer with id %s does not exist", offerId))
                 );
 
-        offer.setStatus(Status.ACCEPTED);
+        offer.setStatus(Status.PENDING);
         offerRepository.save(offer);
     }
 
@@ -71,6 +71,5 @@ public class OfferService {
 
     public List<Offer> getUpcomingEvents() {
         return offerRepository.findByStatusNot(Status.REQUESTED);
-
     }
 }
