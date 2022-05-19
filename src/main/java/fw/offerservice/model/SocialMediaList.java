@@ -4,5 +4,5 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 public enum SocialMediaList {
-        SNAPCHAT, INSTAGRAM, FACEBOOK
+        SNAPCHAT, INSTAGRAM, FACEBOOK, TWITTER, TIKTOK, YOUTUBE, TWITCH
 }
