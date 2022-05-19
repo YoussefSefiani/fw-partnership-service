@@ -23,8 +23,8 @@ public class Offer {
     )
     private Long id;
 
-    private String brandId;
-    private String influencerId;
+    private int brandId;
+    private int influencerId;
 
     private String description;
 
