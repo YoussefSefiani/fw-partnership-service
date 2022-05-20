@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -65,11 +66,39 @@ public class OfferService {
         offerRepository.save(offer);
     }
 
-    public List<Offer> getRequestedOffers() {
-        return offerRepository.findByStatus(Status.REQUESTED);
+    public void payOffer(Long offerId) {
+        Offer offer = offerRepository.findById(offerId)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        String.format("Offer with id %s does not exist", offerId))
+                );
+        offer.setStatus(Status.IN_PROGRESS);
     }
 
-    public List<Offer> getUpcomingEvents() {
-        return offerRepository.findByStatusNot(Status.REQUESTED);
+    public void finishOffer(Long offerId) {
+        Offer offer = offerRepository.findById(offerId)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        String.format("Offer with id %s does not exist", offerId))
+                );
+        offer.setStatus(Status.DONE);
+    }
+
+    public List<Offer> getRequestedOffers(Long influencerId) {
+        return offerRepository.findByStatusAndInfluencerId(Status.REQUESTED, influencerId);
+    }
+
+    public List<Offer> getUpcomingEvents(Long influencerId) {
+        List<Status> statusList = new ArrayList<>();
+        statusList.add(Status.PENDING);
+        statusList.add(Status.IN_PROGRESS);
+        return offerRepository.findByStatusInAndInfluencerId(statusList, influencerId);
+    }
+
+    public List<Offer> getHistoryEvents(Long influencerId) {
+        List<Status> statusList = new ArrayList<>();
+        statusList.add(Status.DECLINED);
+        statusList.add(Status.DONE);
+        return offerRepository.findByStatusInAndInfluencerId(statusList, influencerId);
     }
 }

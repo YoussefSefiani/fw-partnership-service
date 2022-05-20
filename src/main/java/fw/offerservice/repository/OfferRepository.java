@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface OfferRepository extends JpaRepository<Offer, Long> {
     List<Offer> findByInfluencerId(String influencerId);
-    List<Offer> findByStatus(Status status);
-    List<Offer> findByStatusNot(Status status);
+    List<Offer> findByStatusAndInfluencerId(Status status, Long influencerId);
+    List<Offer> findByStatusInAndInfluencerId(List<Status> statusList, Long influencerId);
 }

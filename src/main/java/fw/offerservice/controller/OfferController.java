@@ -39,14 +39,19 @@ public class OfferController {
         offerService.updateInfluencer(offerId, offer);
     }
 
-    @GetMapping(path = "/requested")
-    public List<Offer> getRequestedOffers() {
-        return offerService.getRequestedOffers();
+    @GetMapping(path = "/requested/{influencerId}")
+    public List<Offer> getRequestedOffers(@PathVariable("influencerId") Long influencerId) {
+        return offerService.getRequestedOffers(influencerId);
     }
 
-    @GetMapping(path = "/upcoming")
-    public List<Offer> getUpcomingEvents() {
-        return offerService.getUpcomingEvents();
+    @GetMapping(path = "/upcoming/{influencerId}")
+    public List<Offer> getUpcomingEvents(@PathVariable("influencerId") Long influencerId) {
+        return offerService.getUpcomingEvents(influencerId);
+    }
+
+    @GetMapping(path = "/history/{influencerId}")
+    public List<Offer> getHistoryEvents(@PathVariable("influencerId") Long influencerId) {
+        return offerService.getHistoryEvents(influencerId);
     }
 
     @GetMapping(path = "/accept/{offerId}")
@@ -57,6 +62,16 @@ public class OfferController {
     @GetMapping(path = "/decline/{offerId}")
     public void declineOffer(@PathVariable("offerId") Long offerId) {
         offerService.declineOffer(offerId);
+    }
+
+    @GetMapping("/pay/{offerId}")
+    public void payOffer(@PathVariable("offerId") Long offerId) {
+        offerService.payOffer(offerId);
+    }
+
+    @GetMapping("/finish/{offerId}")
+    public void finishOffer(@PathVariable("offerId") Long offerId) {
+        offerService.finishOffer(offerId);
     }
 
 }
