@@ -115,7 +115,7 @@ public class PartnershipService {
         return partnershipRepository.findByStatusInAndInfluencerId(statusList, influencerId);
     }
 
-    public void getInfluencerStats(Long influencerId) {
+    public Stats getInfluencerStats(Long influencerId) {
 
         Stats influencerStats = new Stats();
 
@@ -158,6 +158,7 @@ public class PartnershipService {
         System.out.println(influencerStats);
 
 
+        return influencerStats;
     }
 
     public int getTotalPartnerships(Long influencerId) {

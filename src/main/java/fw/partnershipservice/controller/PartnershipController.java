@@ -1,6 +1,7 @@
 package fw.partnershipservice.controller;
 
 import fw.partnershipservice.model.Partnership;
+import fw.partnershipservice.model.Stats;
 import fw.partnershipservice.service.PartnershipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -74,8 +75,8 @@ public class PartnershipController {
     }
 
     @GetMapping(path = "stats/influencer/{influencerId}")
-    public void getInfluencerStats(@PathVariable("influencerId") Long influencerId) {
-        partnershipService.getInfluencerStats(influencerId);
+    public Stats getInfluencerStats(@PathVariable("influencerId") Long influencerId) {
+       return partnershipService.getInfluencerStats(influencerId);
     }
 
 
