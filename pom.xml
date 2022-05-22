@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>fw</groupId>
-	<artifactId>offer-service</artifactId>
+	<artifactId>partnership-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>offer-service</name>
-	<description>offer service of final work</description>
+	<name>partnership-service</name>
+	<description>partnership service of final work</description>
 	<properties>
 		<java.version>11</java.version>
 		<spring-cloud.version>2021.0.0</spring-cloud.version>

@@ -1,4 +1,4 @@
-package fw.offerservice.model;
+package fw.partnershipservice.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
@@ -15,7 +15,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Offer {
+public class Partnership {
 
     @Id
     @GeneratedValue(
@@ -31,7 +31,7 @@ public class Offer {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @JoinColumn(name = "offer_id")
+    @JoinColumn(name = "partnership_id")
     @OneToMany(cascade = CascadeType.ALL)
     private List<SocialMediaDetails> socialMediaDetails;
 

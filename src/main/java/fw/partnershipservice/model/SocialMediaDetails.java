@@ -1,4 +1,4 @@
-package fw.offerservice.model;
+package fw.partnershipservice.model;
 
 import lombok.*;
 

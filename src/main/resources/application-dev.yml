@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/db_fw_offer_service
+    url: jdbc:postgresql://localhost:5432/db_fw_partnership_service
     username: postgres
     password: root
   jpa:
@@ -13,7 +13,7 @@ spring:
       show-sql: 'true'
       ddl-auto: update
   application:
-    name: fw-offer-service
+    name: fw-partnership-service
 
 eureka:
   client:

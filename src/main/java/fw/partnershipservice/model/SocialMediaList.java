@@ -1,7 +1,4 @@
-package fw.offerservice.model;
-
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+package fw.partnershipservice.model;
 
 public enum SocialMediaList {
         SNAPCHAT, INSTAGRAM, FACEBOOK, TWITTER, TIKTOK, YOUTUBE, TWITCH

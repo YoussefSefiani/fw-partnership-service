@@ -15,7 +15,7 @@ spring:
       name: user
       password: password
   application:
-    name: fw-offer-service
+    name: fw-partnership-service
 eureka:
   client:
     serviceUrl:
