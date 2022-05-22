@@ -107,6 +107,7 @@ public class PartnershipService {
     }
 
     //prix plateforme pays date
-    public void getStats(Long userId) {
+    public void getInfluencerStats(Long influencerId) {
+        System.out.println(partnershipRepository.countByInfluencerIdAndStatus(influencerId, Status.DONE));
     }
 }

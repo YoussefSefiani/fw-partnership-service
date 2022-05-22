@@ -63,19 +63,19 @@ public class PartnershipController {
         partnershipService.declinePartnership(partnershipId);
     }
 
-    @GetMapping("/pay/{partnershipId}")
+    @GetMapping(path = "/pay/{partnershipId}")
     public void payPartnership(@PathVariable("partnershipId") Long partnershipId) {
         partnershipService.payPartnership(partnershipId);
     }
 
-    @GetMapping("/finish/{partnershipId}")
+    @GetMapping(path = "/finish/{partnershipId}")
     public void finishPartnership(@PathVariable("partnershipId") Long partnershipId) {
         partnershipService.finishPartnership(partnershipId);
     }
 
-    @GetMapping("/stats/{userId}")
-    public void getStats(@PathVariable("userId") Long userId) {
-        partnershipService.getStats(userId);
+    @GetMapping(path = "/stats/influencer/{influencerId}")
+    public void getInfluencerStats(@PathVariable("influencerId") Long influencerId) {
+        partnershipService.getInfluencerStats(influencerId);
     }
 
 
