@@ -1,6 +1,7 @@
 package fw.partnershipservice.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,7 +25,14 @@ public class Partnership {
     private Long id;
 
     private Long brandId;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
+    private String brandName;
+
     private Long influencerId;
+
+
 
     private String description;
 
@@ -44,6 +52,11 @@ public class Partnership {
     @DateTimeFormat(style = "yyyy-MM-dd")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date endDate;
+
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(style = "yyyy-MM-dd")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    private Date finishDate;
 
     private String file;
 
