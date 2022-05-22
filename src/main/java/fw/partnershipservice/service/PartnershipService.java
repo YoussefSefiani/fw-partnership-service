@@ -11,6 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -124,7 +128,7 @@ public class PartnershipService {
         List<Integer> totalPartnershipsMonthList = new ArrayList<>();
         List<Integer> totalMoneyEarnedMonthList = new ArrayList<>();
         HashMap<String, Integer> topSocialMediaMap = new HashMap<>();
-        HashMap<Date, Integer> totalEarningsGraphDataMap = new HashMap<>();
+        HashMap<String, Integer> totalEarningsGraphDataMap = new HashMap<>();
 
         partnerships.forEach(partnership -> {
 
@@ -155,9 +159,6 @@ public class PartnershipService {
         influencerStats.setTotalMoneyEarnedMonth(totalMoneyEarnedMonthList.stream().mapToInt(Integer::intValue).sum());
         influencerStats.setTotalEarningsGraphData(totalEarningsGraphDataMap);
 
-        System.out.println(influencerStats);
-
-
         return influencerStats;
     }
 
@@ -178,10 +179,12 @@ public class PartnershipService {
 
     }
 
-    private void totalEarningsGraphData(HashMap<Date, Integer> totalEarningsGraphDataMap, Date finishDate, SocialMediaDetails socialMediaDetail) {
+    private void totalEarningsGraphData(HashMap<String, Integer> totalEarningsGraphDataMap, Date finishDate, SocialMediaDetails socialMediaDetail) {
         System.out.println("here graph map " + totalEarningsGraphDataMap);
-        totalEarningsGraphDataMap.putIfAbsent(finishDate, 0);
-        totalEarningsGraphDataMap.merge(finishDate, socialMediaDetailsTotalEarned(socialMediaDetail), Integer::sum);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        totalEarningsGraphDataMap.putIfAbsent(dateFormat.format(finishDate), 0);
+        totalEarningsGraphDataMap.merge(dateFormat.format(finishDate), socialMediaDetailsTotalEarned(socialMediaDetail), Integer::sum);
 
     }
 
