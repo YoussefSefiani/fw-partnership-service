@@ -38,42 +38,42 @@ public class PartnershipController {
         partnershipService.updateInfluencer(partnershipId, partnership);
     }
 
-    @GetMapping(path = "/requested/{influencerId}")
+    @GetMapping(path = "requested/{influencerId}")
     public List<Partnership> getRequestedPartnerships(@PathVariable("influencerId") Long influencerId) {
         return partnershipService.getRequestedPartnerships(influencerId);
     }
 
-    @GetMapping(path = "/upcoming/{influencerId}")
+    @GetMapping(path = "upcoming/{influencerId}")
     public List<Partnership> getUpcomingEvents(@PathVariable("influencerId") Long influencerId) {
         return partnershipService.getUpcomingEvents(influencerId);
     }
 
-    @GetMapping(path = "/history/{influencerId}")
+    @GetMapping(path = "history/{influencerId}")
     public List<Partnership> getHistoryEvents(@PathVariable("influencerId") Long influencerId) {
         return partnershipService.getHistoryEvents(influencerId);
     }
 
-    @GetMapping(path = "/accept/{partnershipId}")
+    @GetMapping(path = "accept/{partnershipId}")
     public void acceptPartnership(@PathVariable("partnershipId") Long partnershipId) {
         partnershipService.acceptPartnership(partnershipId);
     }
 
-    @GetMapping(path = "/decline/{partnershipId}")
+    @GetMapping(path = "decline/{partnershipId}")
     public void declinePartnership(@PathVariable("partnershipId") Long partnershipId) {
         partnershipService.declinePartnership(partnershipId);
     }
 
-    @GetMapping(path = "/pay/{partnershipId}")
+    @GetMapping(path = "pay/{partnershipId}")
     public void payPartnership(@PathVariable("partnershipId") Long partnershipId) {
         partnershipService.payPartnership(partnershipId);
     }
 
-    @GetMapping(path = "/finish/{partnershipId}")
+    @GetMapping(path = "finish/{partnershipId}")
     public void finishPartnership(@PathVariable("partnershipId") Long partnershipId) {
         partnershipService.finishPartnership(partnershipId);
     }
 
-    @GetMapping(path = "/stats/influencer/{influencerId}")
+    @GetMapping(path = "stats/influencer/{influencerId}")
     public void getInfluencerStats(@PathVariable("influencerId") Long influencerId) {
         partnershipService.getInfluencerStats(influencerId);
     }

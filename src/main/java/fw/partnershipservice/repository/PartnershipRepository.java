@@ -10,5 +10,5 @@ public interface PartnershipRepository extends JpaRepository<Partnership, Long> 
     List<Partnership> findByInfluencerId(String influencerId);
     List<Partnership> findByStatusAndInfluencerId(Status status, Long influencerId);
     List<Partnership> findByStatusInAndInfluencerId(List<Status> statusList, Long influencerId);
-    long countByInfluencerIdAndStatus(Long influencerId, Status status);
+    int countByInfluencerIdAndStatus(Long influencerId, Status status);
 }
