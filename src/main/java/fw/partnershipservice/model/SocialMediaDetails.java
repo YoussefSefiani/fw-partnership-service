@@ -28,7 +28,7 @@ public class SocialMediaDetails {
     private int posts;
     private int postPrice;
 
-    private int highlights;
     private int highlightPrice;
+    private int highlights;
 
 }
