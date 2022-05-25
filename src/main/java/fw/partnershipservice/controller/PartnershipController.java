@@ -66,7 +66,7 @@ public class PartnershipController {
     }
 
     @PostMapping(path = "validate")
-    public void validatePartnership(Long partnershipId) {
+    public void validatePartnership(@RequestParam("partnershipId") Long partnershipId) {
         partnershipService.validatePartnership(partnershipId);
     }
 
