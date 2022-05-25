@@ -75,21 +75,18 @@ public class PartnershipService {
     }
 
     public void payPartnership(Long partnershipId, CheckoutPayment payment) {
+        consumer.payPartnership(partnershipId, payment);
+    }
 
+    public void validatePartnership(Long partnershipId) {
         Partnership partnership = partnershipRepository.findById(partnershipId)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
                         String.format("partnership with id %s does not exist", partnershipId))
                 );
 
-        HttpServletResponse response = consumer.payPartnership(payment);
-        System.out.println(response.getStatus());
-
-        if(response.getStatus() == 200) {
-            partnership.setStatus(Status.IN_PROGRESS);
-            partnershipRepository.save(partnership);
-        }
-
+        partnership.setStatus(Status.IN_PROGRESS);
+        partnershipRepository.save(partnership);
     }
 
     public void finishPartnership(Long partnershipId) {
@@ -207,6 +204,4 @@ public class PartnershipService {
         }
         return false;
     }
-
-
 }

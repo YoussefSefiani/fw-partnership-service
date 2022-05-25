@@ -70,6 +70,11 @@ public class PartnershipController {
         partnershipService.payPartnership(partnershipId, checkoutPayment);
     }
 
+    @PostMapping(path = "validate")
+    public void validatePartnership(Long partnershipId) {
+        partnershipService.validatePartnership(partnershipId);
+    }
+
     @GetMapping(path = "finish/{partnershipId}")
     public void finishPartnership(@PathVariable("partnershipId") Long partnershipId) {
         partnershipService.finishPartnership(partnershipId);
