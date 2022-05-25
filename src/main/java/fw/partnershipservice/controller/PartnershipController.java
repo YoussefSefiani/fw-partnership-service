@@ -66,8 +66,8 @@ public class PartnershipController {
     }
 
     @PostMapping(path = "pay/{partnershipId}")
-    public void payPartnership(@PathVariable("partnershipId") Long partnershipId, @RequestBody CheckoutPayment checkoutPayment) {
-        partnershipService.payPartnership(partnershipId, checkoutPayment);
+    public void payPartnership(@RequestBody CheckoutPayment checkoutPayment) {
+        partnershipService.payPartnership(checkoutPayment);
     }
 
     @PostMapping(path = "validate")

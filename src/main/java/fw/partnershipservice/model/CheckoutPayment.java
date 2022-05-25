@@ -8,13 +8,16 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CheckoutPayment {
+
+    private Long partnershipId;
+
     private String name;
     private String currency;
 
     private String successUrl;
     private String cancelUrl;
 
-    private long amount;
-    private long quantity;
+    private Long amount;
+    private Long quantity;
 
 }

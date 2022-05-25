@@ -74,7 +74,7 @@ public class PartnershipService {
         partnershipRepository.save(partnership);
     }
 
-    public void payPartnership(Long partnershipId, CheckoutPayment payment) {
+    public void payPartnership(CheckoutPayment payment) {
         consumer.payPartnership(payment);
     }
 
