@@ -1,9 +1,7 @@
 package fw.partnershipservice.service;
 
-import fw.partnershipservice.model.Partnership;
-import fw.partnershipservice.model.SocialMediaDetails;
-import fw.partnershipservice.model.Stats;
-import fw.partnershipservice.model.Status;
+import fw.partnershipservice.feign.PaymentRestConsumer;
+import fw.partnershipservice.model.*;
 import fw.partnershipservice.repository.PartnershipRepository;
 import fw.partnershipservice.repository.SocialMediaDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.servlet.http.HttpServletResponse;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -23,11 +20,13 @@ public class PartnershipService {
 
     private final PartnershipRepository partnershipRepository;
     private final SocialMediaDetailsRepository socialMediaDetailsRepository;
+    private PaymentRestConsumer consumer;
 
     @Autowired
-    public PartnershipService(PartnershipRepository partnershipRepository, SocialMediaDetailsRepository socialMediaDetailsRepository) {
+    public PartnershipService(PartnershipRepository partnershipRepository, SocialMediaDetailsRepository socialMediaDetailsRepository, PaymentRestConsumer consumer) {
         this.partnershipRepository = partnershipRepository;
         this.socialMediaDetailsRepository = socialMediaDetailsRepository;
+        this.consumer = consumer;
     }
 
     public List<Partnership> getInfluencerPartnerships(String influencerId) {
@@ -75,14 +74,22 @@ public class PartnershipService {
         partnershipRepository.save(partnership);
     }
 
-    public void payPartnership(Long partnershipId) {
+    public void payPartnership(Long partnershipId, CheckoutPayment payment) {
+
         Partnership partnership = partnershipRepository.findById(partnershipId)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
                         String.format("partnership with id %s does not exist", partnershipId))
                 );
-        partnership.setStatus(Status.IN_PROGRESS);
-        partnershipRepository.save(partnership);
+
+        HttpServletResponse response = consumer.payPartnership(payment);
+        System.out.println(response.getStatus());
+
+        if(response.getStatus() == 200) {
+            partnership.setStatus(Status.IN_PROGRESS);
+            partnershipRepository.save(partnership);
+        }
+
     }
 
     public void finishPartnership(Long partnershipId) {

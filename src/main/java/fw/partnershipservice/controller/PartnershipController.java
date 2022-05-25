@@ -1,5 +1,6 @@
 package fw.partnershipservice.controller;
 
+import fw.partnershipservice.model.CheckoutPayment;
 import fw.partnershipservice.model.Partnership;
 import fw.partnershipservice.model.Stats;
 import fw.partnershipservice.service.PartnershipService;
@@ -64,9 +65,9 @@ public class PartnershipController {
         partnershipService.declinePartnership(partnershipId);
     }
 
-    @GetMapping(path = "pay/{partnershipId}")
-    public void payPartnership(@PathVariable("partnershipId") Long partnershipId) {
-        partnershipService.payPartnership(partnershipId);
+    @PostMapping(path = "pay/{partnershipId}")
+    public void payPartnership(@PathVariable("partnershipId") Long partnershipId, @RequestBody CheckoutPayment checkoutPayment) {
+        partnershipService.payPartnership(partnershipId, checkoutPayment);
     }
 
     @GetMapping(path = "finish/{partnershipId}")

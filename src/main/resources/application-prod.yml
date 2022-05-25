@@ -31,3 +31,8 @@ security:
 server:
   error:
     include-message: always
+
+app:
+  services:
+    payment:
+      url: https://fw-payment-service.herokuapp.com

@@ -35,3 +35,9 @@ server:
   error:
     include-message: always
   port: 8082
+
+app:
+  services:
+    payment:
+      url: http://localhost:8888
+
