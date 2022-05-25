@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface PaymentRestConsumer {
 
     @PostMapping("/api/payment")
-    void payPartnership(Long partnershipId, CheckoutPayment checkoutPayment);
+    void payPartnership(CheckoutPayment checkoutPayment);
 }

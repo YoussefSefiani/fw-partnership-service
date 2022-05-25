@@ -75,7 +75,7 @@ public class PartnershipService {
     }
 
     public void payPartnership(Long partnershipId, CheckoutPayment payment) {
-        consumer.payPartnership(partnershipId, payment);
+        consumer.payPartnership(payment);
     }
 
 
