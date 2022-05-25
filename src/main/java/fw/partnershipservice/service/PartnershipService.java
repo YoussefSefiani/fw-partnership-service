@@ -18,13 +18,11 @@ public class PartnershipService {
 
     private final PartnershipRepository partnershipRepository;
     private final SocialMediaDetailsRepository socialMediaDetailsRepository;
-    private final PaymentRestConsumer consumer;
 
     @Autowired
-    public PartnershipService(PartnershipRepository partnershipRepository, SocialMediaDetailsRepository socialMediaDetailsRepository, PaymentRestConsumer consumer) {
+    public PartnershipService(PartnershipRepository partnershipRepository, SocialMediaDetailsRepository socialMediaDetailsRepository) {
         this.partnershipRepository = partnershipRepository;
         this.socialMediaDetailsRepository = socialMediaDetailsRepository;
-        this.consumer = consumer;
     }
 
     public List<Partnership> getInfluencerPartnerships(String influencerId) {
