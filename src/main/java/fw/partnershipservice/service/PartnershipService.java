@@ -1,6 +1,5 @@
 package fw.partnershipservice.service;
 
-import fw.partnershipservice.feign.PaymentRestConsumer;
 import fw.partnershipservice.model.*;
 import fw.partnershipservice.repository.PartnershipRepository;
 import fw.partnershipservice.repository.SocialMediaDetailsRepository;
@@ -9,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.servlet.http.HttpServletResponse;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -73,11 +71,6 @@ public class PartnershipService {
         partnership.setStatus(Status.DECLINED);
         partnershipRepository.save(partnership);
     }
-
-    public void payPartnership(CheckoutPayment payment) {
-        consumer.payPartnership(payment);
-    }
-
 
     public void validatePartnership(Long partnershipId) {
         Partnership partnership = partnershipRepository.findById(partnershipId)
