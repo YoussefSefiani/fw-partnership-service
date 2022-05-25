@@ -78,6 +78,7 @@ public class PartnershipService {
         consumer.payPartnership(partnershipId, payment);
     }
 
+
     public void validatePartnership(Long partnershipId) {
         Partnership partnership = partnershipRepository.findById(partnershipId)
                 .orElseThrow(() -> new ResponseStatusException(
