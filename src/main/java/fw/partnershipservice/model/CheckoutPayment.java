@@ -16,4 +16,5 @@ public class CheckoutPayment {
 
     private long amount;
     private long quantity;
+
 }
