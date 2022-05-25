@@ -65,7 +65,7 @@ public class PartnershipController {
         partnershipService.declinePartnership(partnershipId);
     }
 
-    @PostMapping(path = "pay/{partnershipId}")
+    @PostMapping(path = "pay")
     public void payPartnership(@RequestBody CheckoutPayment checkoutPayment) {
         partnershipService.payPartnership(checkoutPayment);
     }
