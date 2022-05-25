@@ -65,8 +65,8 @@ public class PartnershipController {
         partnershipService.declinePartnership(partnershipId);
     }
 
-    @PostMapping(path = "validate")
-    public void validatePartnership(@RequestParam("partnershipId") Long partnershipId) {
+    @PostMapping(path = "validate/{partnershipId}")
+    public void validatePartnership(@PathVariable("partnershipId") Long partnershipId) {
         partnershipService.validatePartnership(partnershipId);
     }
 
