@@ -40,4 +40,3 @@ app:
   services:
     payment:
       url: http://localhost:8888
-

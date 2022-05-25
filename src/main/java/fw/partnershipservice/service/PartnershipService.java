@@ -20,7 +20,7 @@ public class PartnershipService {
 
     private final PartnershipRepository partnershipRepository;
     private final SocialMediaDetailsRepository socialMediaDetailsRepository;
-    private PaymentRestConsumer consumer;
+    private final PaymentRestConsumer consumer;
 
     @Autowired
     public PartnershipService(PartnershipRepository partnershipRepository, SocialMediaDetailsRepository socialMediaDetailsRepository, PaymentRestConsumer consumer) {
