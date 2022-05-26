@@ -108,6 +108,10 @@ public class PartnershipService {
         return partnershipRepository.findByStatusInAndInfluencerId(statusList, influencerId);
     }
 
+    public List<Partnership> getPendingPartnerships(Long brandId) {
+        return partnershipRepository.findByStatusAndBrandId(Status.PENDING, brandId);
+    }
+
     public List<Partnership> getHistoryEvents(Long influencerId) {
         List<Status> statusList = new ArrayList<>();
         statusList.add(Status.DECLINED);

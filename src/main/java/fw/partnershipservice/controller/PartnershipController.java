@@ -50,6 +50,11 @@ public class PartnershipController {
         return partnershipService.getUpcomingEvents(influencerId);
     }
 
+    @GetMapping(path = "pending/{brandId}")
+    public List<Partnership> getPendingPartnerships(@PathVariable("brandId") Long brandId) {
+        return partnershipService.getPendingPartnerships(brandId);
+    }
+
     @GetMapping(path = "history/{influencerId}")
     public List<Partnership> getHistoryEvents(@PathVariable("influencerId") Long influencerId) {
         return partnershipService.getHistoryEvents(influencerId);
