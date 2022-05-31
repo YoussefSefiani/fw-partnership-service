@@ -21,7 +21,7 @@ public class PartnershipController {
     }
 
     @GetMapping(path="{influencerId}")
-    public List<Partnership> getInfluencerPartnership(@PathVariable("influencerId") Long influencerId) {
+    public List<Partnership> getInfluencerPartnerships(@PathVariable("influencerId") Long influencerId) {
         return partnershipService.getInfluencerPartnerships(influencerId);
     }
 
