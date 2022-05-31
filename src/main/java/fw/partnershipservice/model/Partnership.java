@@ -32,8 +32,6 @@ public class Partnership {
 
     private Long influencerId;
 
-
-
     private String description;
 
     @Enumerated(EnumType.STRING)
@@ -59,5 +57,17 @@ public class Partnership {
     private Date finishDate;
 
     private String file;
+
+    public Partnership(Long id, String brandName, String description, Status status, List<SocialMediaDetails> socialMediaDetails, Date startDate, Date endDate, Date finishDate, String file) {
+        this.id = id;
+        this.brandName = brandName;
+        this.description = description;
+        this.status = status;
+        this.socialMediaDetails = socialMediaDetails;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.finishDate = finishDate;
+        this.file = file;
+    }
 
 }

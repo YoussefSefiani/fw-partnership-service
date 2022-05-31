@@ -1,5 +1,6 @@
 package fw.partnershipservice.service;
 
+import fw.partnershipservice.feign.UserRestConsumer;
 import fw.partnershipservice.model.*;
 import fw.partnershipservice.repository.PartnershipRepository;
 import fw.partnershipservice.repository.SocialMediaDetailsRepository;
@@ -18,15 +19,30 @@ public class PartnershipService {
 
     private final PartnershipRepository partnershipRepository;
     private final SocialMediaDetailsRepository socialMediaDetailsRepository;
+    private final UserRestConsumer userRestConsumer;
 
     @Autowired
-    public PartnershipService(PartnershipRepository partnershipRepository, SocialMediaDetailsRepository socialMediaDetailsRepository) {
+    public PartnershipService(PartnershipRepository partnershipRepository, SocialMediaDetailsRepository socialMediaDetailsRepository, UserRestConsumer userRestConsumer) {
         this.partnershipRepository = partnershipRepository;
         this.socialMediaDetailsRepository = socialMediaDetailsRepository;
+        this.userRestConsumer = userRestConsumer;
     }
 
-    public List<Partnership> getInfluencerPartnerships(String influencerId) {
-        return partnershipRepository.findByInfluencerId(influencerId);
+    public List<Partnership> getInfluencerPartnerships(Long influencerId) {
+        List<Partnership> partnershipsList = partnershipRepository.findByInfluencerId(influencerId);
+        BrandIdWrapper brandIds = new BrandIdWrapper();
+        partnershipsList.forEach(partnership -> {
+            brandIds.getBrandIds().add(partnership.getBrandId());
+        });
+        System.out.println(brandIds);
+        userRestConsumer.getAllPartnershipBrandNames(brandIds).forEach((key, value) -> {
+            partnershipsList.forEach(partnership -> {
+                if(Objects.equals(partnership.getBrandId(), key)) {
+                    partnership.setBrandName(value);
+                }
+            });
+        });
+        return partnershipsList;
     }
 
     public void addPartnership(Partnership partnership) {
