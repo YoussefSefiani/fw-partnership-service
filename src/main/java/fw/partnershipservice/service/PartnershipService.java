@@ -45,6 +45,25 @@ public class PartnershipService {
         return partnershipsList;
     }
 
+    public List<Partnership> getBrandPartnerships(Long brandId) {
+
+        List<Partnership> partnershipsList = partnershipRepository.findByBrandId(brandId);
+        InfluencerIdWrapper influencerIds = new InfluencerIdWrapper();
+        partnershipsList.forEach(partnership -> {
+            influencerIds.getInfluencerIds().add(partnership.getInfluencerId());
+        });
+        System.out.println(influencerIds);
+        userRestConsumer.getAllPartnershipInfluencerNames(influencerIds).forEach((key, value) -> {
+            partnershipsList.forEach(partnership -> {
+                if(Objects.equals(partnership.getInfluencerId(), key)) {
+                    partnership.setInfluencerName(value);
+                }
+            });
+        });
+        return partnershipsList;
+
+    }
+
     public void addPartnership(Partnership partnership) {
         partnership.setStatus(Status.REQUESTED);
         partnershipRepository.save(partnership);

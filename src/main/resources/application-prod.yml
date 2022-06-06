@@ -37,4 +37,4 @@ app:
     payment:
       url: https://fw-payment-service.herokuapp.com
     auth:
-      url: http://fw-auth-service.herokuapp.com
+      url: https://fw-auth-service.herokuapp.com

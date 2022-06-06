@@ -30,6 +30,10 @@ public class Partnership {
     @Transient
     private String brandName;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
+    private String influencerName;
+
     private Long influencerId;
 
     private String description;

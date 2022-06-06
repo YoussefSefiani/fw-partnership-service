@@ -20,9 +20,14 @@ public class PartnershipController {
         this.partnershipService = partnershipService;
     }
 
-    @GetMapping(path="{influencerId}")
+    @GetMapping(path="influencer/{influencerId}")
     public List<Partnership> getInfluencerPartnerships(@PathVariable("influencerId") Long influencerId) {
         return partnershipService.getInfluencerPartnerships(influencerId);
+    }
+
+    @GetMapping(path="brand/{brandId}")
+    public List<Partnership> getBrandPartnerships(@PathVariable("brandId") Long brandId) {
+        return partnershipService.getBrandPartnerships(brandId);
     }
 
     @PostMapping
