@@ -159,11 +159,16 @@ public class PartnershipService {
         Stats influencerStats = new Stats();
 
         List<Partnership> partnerships = partnershipRepository.findByStatusAndInfluencerId(Status.DONE, influencerId);
+
         List<Integer> totalMoneyEarnedList = new ArrayList<>();
+        List<Integer> totalMoneyEarnedMonthList = new ArrayList<>();
+        List<Integer> totalMoneyEarnedWeekList = new ArrayList<>();
+
         List<Integer> totalPartnershipsMonthList = new ArrayList<>();
         List<Integer> totalPartnershipsWeekList = new ArrayList<>();
-        List<Integer> totalMoneyEarnedMonthList = new ArrayList<>();
+
         HashMap<String, Integer> topSocialMediaMap = new HashMap<>();
+
         HashMap<String, Integer> totalEarningsGraphDataMap = new HashMap<>();
         HashMap<String, Integer> totalEarningsMonthGraphDataMap = new HashMap<>();
         HashMap<String, Integer> totalEarningsWeekGraphDataMap = new HashMap<>();
@@ -188,6 +193,9 @@ public class PartnershipService {
                 if(currentMonthChecker(partnership.getFinishDate())) {
                     totalMoneyEarnedMonthList.add(socialMediaDetailsTotalEarned(socialMediaDetail));
                 }
+                if(currentWeekChecker(partnership.getFinishDate())) {
+                    totalMoneyEarnedWeekList.add(socialMediaDetailsTotalEarned(socialMediaDetail));
+                }
                 totalSocialMedia(topSocialMediaMap, socialMediaDetail);
                 earningsGraphData(totalEarningsGraphDataMap, partnership.getFinishDate(), socialMediaDetail);
                 if(currentMonthChecker(partnership.getFinishDate())) {
@@ -206,7 +214,10 @@ public class PartnershipService {
         influencerStats.setTotalPartnershipsMonth(totalPartnershipsMonthList.stream().mapToInt(Integer::intValue).sum());
         influencerStats.setTotalPartnershipsWeek(totalPartnershipsWeekList.stream().mapToInt(Integer::intValue).sum());
         influencerStats.setTotalMoneyEarnedMonth(totalMoneyEarnedMonthList.stream().mapToInt(Integer::intValue).sum());
+        influencerStats.setTotalMoneyEarnedWeek(totalMoneyEarnedWeekList.stream().mapToInt(Integer::intValue).sum());
         influencerStats.setTotalEarningsGraphData(totalEarningsGraphDataMap);
+        influencerStats.setTotalEarningsMonthGraphData(totalEarningsMonthGraphDataMap);
+        influencerStats.setTotalEarningsWeekGraphData(totalEarningsWeekGraphDataMap);
 
         return influencerStats;
     }

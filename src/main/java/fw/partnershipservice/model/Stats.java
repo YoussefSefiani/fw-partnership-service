@@ -19,7 +19,7 @@ public class Stats {
     private Long influencerId;
 
     private int totalPartnerships;
-    private int totalMoneyEarned;
+
 
     private HashMap<String, Integer> topCountries;
     private HashMap<String, Integer> topSocialMedia;
@@ -28,7 +28,10 @@ public class Stats {
     private HashMap<String, Integer> totalEarningsMonthGraphData;
     private HashMap<String, Integer> totalEarningsWeekGraphData;
 
+    private int totalMoneyEarned;
     private int totalMoneyEarnedMonth;
+    private int totalMoneyEarnedWeek;
+
     private int totalPartnershipsMonth;
     private int totalPartnershipsWeek;
 
