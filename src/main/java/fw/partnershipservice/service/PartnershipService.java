@@ -161,14 +161,21 @@ public class PartnershipService {
         List<Partnership> partnerships = partnershipRepository.findByStatusAndInfluencerId(Status.DONE, influencerId);
         List<Integer> totalMoneyEarnedList = new ArrayList<>();
         List<Integer> totalPartnershipsMonthList = new ArrayList<>();
+        List<Integer> totalPartnershipsWeekList = new ArrayList<>();
         List<Integer> totalMoneyEarnedMonthList = new ArrayList<>();
         HashMap<String, Integer> topSocialMediaMap = new HashMap<>();
         HashMap<String, Integer> totalEarningsGraphDataMap = new HashMap<>();
+        HashMap<String, Integer> totalEarningsMonthGraphDataMap = new HashMap<>();
+        HashMap<String, Integer> totalEarningsWeekGraphDataMap = new HashMap<>();
 
         partnerships.forEach(partnership -> {
 
             if(currentMonthChecker(partnership.getFinishDate())) {
                 totalPartnershipsMonthList.add(1);
+            }
+
+            if(currentWeekChecker(partnership.getFinishDate())) {
+                totalPartnershipsWeekList.add(1);
             }
 
             Long partnershipId = partnership.getId();
@@ -182,7 +189,13 @@ public class PartnershipService {
                     totalMoneyEarnedMonthList.add(socialMediaDetailsTotalEarned(socialMediaDetail));
                 }
                 totalSocialMedia(topSocialMediaMap, socialMediaDetail);
-                totalEarningsGraphData(totalEarningsGraphDataMap, partnership.getFinishDate(), socialMediaDetail);
+                earningsGraphData(totalEarningsGraphDataMap, partnership.getFinishDate(), socialMediaDetail);
+                if(currentMonthChecker(partnership.getFinishDate())) {
+                    earningsGraphData(totalEarningsMonthGraphDataMap, partnership.getFinishDate(), socialMediaDetail);
+                }
+                if(currentWeekChecker(partnership.getFinishDate())) {
+                    earningsGraphData(totalEarningsWeekGraphDataMap, partnership.getFinishDate(), socialMediaDetail);
+                }
             });
         });
 
@@ -191,6 +204,7 @@ public class PartnershipService {
         influencerStats.setTotalMoneyEarned(totalMoneyEarnedList.stream().mapToInt(Integer::intValue).sum());
         influencerStats.setTopSocialMedia(topSocialMediaMap);
         influencerStats.setTotalPartnershipsMonth(totalPartnershipsMonthList.stream().mapToInt(Integer::intValue).sum());
+        influencerStats.setTotalPartnershipsWeek(totalPartnershipsWeekList.stream().mapToInt(Integer::intValue).sum());
         influencerStats.setTotalMoneyEarnedMonth(totalMoneyEarnedMonthList.stream().mapToInt(Integer::intValue).sum());
         influencerStats.setTotalEarningsGraphData(totalEarningsGraphDataMap);
 
@@ -214,13 +228,11 @@ public class PartnershipService {
 
     }
 
-    private void totalEarningsGraphData(HashMap<String, Integer> totalEarningsGraphDataMap, Date finishDate, SocialMediaDetails socialMediaDetail) {
-        System.out.println("here graph map " + totalEarningsGraphDataMap);
+    private void earningsGraphData(HashMap<String, Integer> graphDataMap, Date finishDate, SocialMediaDetails socialMediaDetail) {
+        System.out.println("here graph map " + graphDataMap);
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        totalEarningsGraphDataMap.putIfAbsent(dateFormat.format(finishDate), 0);
-        totalEarningsGraphDataMap.merge(dateFormat.format(finishDate), socialMediaDetailsTotalEarned(socialMediaDetail), Integer::sum);
-
+        graphDataMap.putIfAbsent(dateFormat.format(finishDate), 0);
+        graphDataMap.merge(dateFormat.format(finishDate), socialMediaDetailsTotalEarned(socialMediaDetail), Integer::sum);
     }
 
     private boolean currentMonthChecker(Date finishDatePartnership) {
@@ -234,5 +246,16 @@ public class PartnershipService {
             return cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH);
         }
         return false;
+    }
+
+    public static boolean currentWeekChecker(Date date) {
+        Calendar currentCalendar = Calendar.getInstance();
+        int week = currentCalendar.get(Calendar.WEEK_OF_YEAR);
+        int year = currentCalendar.get(Calendar.YEAR);
+        Calendar targetCalendar = Calendar.getInstance();
+        targetCalendar.setTime(date);
+        int targetWeek = targetCalendar.get(Calendar.WEEK_OF_YEAR);
+        int targetYear = targetCalendar.get(Calendar.YEAR);
+        return week == targetWeek && year == targetYear;
     }
 }

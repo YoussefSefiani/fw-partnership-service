@@ -25,9 +25,12 @@ public class Stats {
     private HashMap<String, Integer> topSocialMedia;
 
     private HashMap<String, Integer> totalEarningsGraphData;
+    private HashMap<String, Integer> totalEarningsMonthGraphData;
+    private HashMap<String, Integer> totalEarningsWeekGraphData;
 
     private int totalMoneyEarnedMonth;
     private int totalPartnershipsMonth;
+    private int totalPartnershipsWeek;
 
 
 }
