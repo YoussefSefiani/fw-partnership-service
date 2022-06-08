@@ -23,6 +23,7 @@ public class Stats {
 
     private HashMap<String, Integer> topCountries;
     private HashMap<String, Integer> topSocialMedia;
+    private HashMap<Integer, Integer> topMonths;
 
     private HashMap<String, Integer> totalEarningsGraphData;
     private HashMap<String, Integer> totalEarningsMonthGraphData;

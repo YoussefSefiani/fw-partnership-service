@@ -168,6 +168,7 @@ public class PartnershipService {
         List<Integer> totalPartnershipsWeekList = new ArrayList<>();
 
         HashMap<String, Integer> topSocialMediaMap = new HashMap<>();
+        HashMap<Integer, Integer> topMonths = new HashMap<>();
 
         HashMap<String, Integer> totalEarningsGraphDataMap = new HashMap<>();
         HashMap<String, Integer> totalEarningsMonthGraphDataMap = new HashMap<>();
@@ -188,6 +189,7 @@ public class PartnershipService {
             System.out.println(partnership);
             socialMediaDetails.forEach(socialMediaDetail -> {
 
+                getMonthlyEarnings(topMonths, socialMediaDetail, partnership.getFinishDate());
                 System.out.println(socialMediaDetail);
                 totalMoneyEarnedList.add(socialMediaDetailsTotalEarned(socialMediaDetail));
                 if(currentMonthChecker(partnership.getFinishDate())) {
@@ -218,6 +220,7 @@ public class PartnershipService {
         influencerStats.setTotalEarningsGraphData(totalEarningsGraphDataMap);
         influencerStats.setTotalEarningsMonthGraphData(totalEarningsMonthGraphDataMap);
         influencerStats.setTotalEarningsWeekGraphData(totalEarningsWeekGraphDataMap);
+        influencerStats.setTopMonths(topMonths);
 
         return influencerStats;
     }
@@ -236,7 +239,12 @@ public class PartnershipService {
     private void totalSocialMedia(HashMap<String, Integer> socialMediaMap, SocialMediaDetails socialMediaDetail) {
         socialMediaMap.putIfAbsent(socialMediaDetail.getName().name(), 0);
         socialMediaMap.merge(socialMediaDetail.getName().name(), 1, Integer::sum);
+    }
 
+    private void getMonthlyEarnings(HashMap<Integer, Integer> topMonths ,SocialMediaDetails socialMediaDetail, Date date) {
+        int currentMonth = getMonthFromGivenDate(date);
+        topMonths.putIfAbsent(currentMonth, 0);
+        topMonths.merge(currentMonth, socialMediaDetailsTotalEarned(socialMediaDetail), Integer::sum);
     }
 
     private void earningsGraphData(HashMap<String, Integer> graphDataMap, Date finishDate, SocialMediaDetails socialMediaDetail) {
@@ -246,17 +254,23 @@ public class PartnershipService {
         graphDataMap.merge(dateFormat.format(finishDate), socialMediaDetailsTotalEarned(socialMediaDetail), Integer::sum);
     }
 
-    private boolean currentMonthChecker(Date finishDatePartnership) {
+    private boolean currentMonthChecker(Date date) {
         Calendar cal1 = Calendar.getInstance();
         Calendar cal2 = Calendar.getInstance();
 
-        cal1.setTime(finishDatePartnership);
+        cal1.setTime(date);
         cal2.setTime(new Date());
-
         if(cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)) {
             return cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH);
         }
         return false;
+    }
+
+    private int getMonthFromGivenDate(Date date) {
+        Date dateObj = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dateObj);
+        return cal.get(Calendar.MONTH);
     }
 
     public static boolean currentWeekChecker(Date date) {
