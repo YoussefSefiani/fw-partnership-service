@@ -243,6 +243,7 @@ public class PartnershipService {
 
     private void getMonthlyEarnings(HashMap<Integer, Integer> topMonths ,SocialMediaDetails socialMediaDetail, Date date) {
         int currentMonth = getMonthFromGivenDate(date);
+        System.out.println("CURRENT MONTH: " + currentMonth);
         topMonths.putIfAbsent(currentMonth, 0);
         topMonths.merge(currentMonth, socialMediaDetailsTotalEarned(socialMediaDetail), Integer::sum);
     }
