@@ -268,9 +268,8 @@ public class PartnershipService {
     }
 
     private int getMonthFromGivenDate(Date date) {
-        Date dateObj = new Date();
         Calendar cal = Calendar.getInstance();
-        cal.setTime(dateObj);
+        cal.setTime(date);
         return cal.get(Calendar.MONTH);
     }
 
