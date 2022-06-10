@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -60,9 +61,11 @@ public class Partnership {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date finishDate;
 
-    private String file;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
+    private MultipartFile file;
 
-    public Partnership(Long id, String brandName, String description, Status status, List<SocialMediaDetails> socialMediaDetails, Date startDate, Date endDate, Date finishDate, String file) {
+    public Partnership(Long id, String brandName, String description, Status status, List<SocialMediaDetails> socialMediaDetails, Date startDate, Date endDate, Date finishDate, MultipartFile file) {
         this.id = id;
         this.brandName = brandName;
         this.description = description;

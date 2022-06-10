@@ -38,3 +38,5 @@ app:
       url: https://fw-payment-service.herokuapp.com
     auth:
       url: https://fw-auth-service.herokuapp.com
+    file:
+      url: https://fw-file-service.herokuapp.com

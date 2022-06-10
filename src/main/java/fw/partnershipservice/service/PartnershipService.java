@@ -1,5 +1,6 @@
 package fw.partnershipservice.service;
 
+import fw.partnershipservice.feign.FileRestConsumer;
 import fw.partnershipservice.feign.UserRestConsumer;
 import fw.partnershipservice.model.*;
 import fw.partnershipservice.repository.PartnershipRepository;
@@ -20,12 +21,14 @@ public class PartnershipService {
     private final PartnershipRepository partnershipRepository;
     private final SocialMediaDetailsRepository socialMediaDetailsRepository;
     private final UserRestConsumer userRestConsumer;
+    private final FileRestConsumer fileRestConsumer;
 
     @Autowired
-    public PartnershipService(PartnershipRepository partnershipRepository, SocialMediaDetailsRepository socialMediaDetailsRepository, UserRestConsumer userRestConsumer) {
+    public PartnershipService(PartnershipRepository partnershipRepository, SocialMediaDetailsRepository socialMediaDetailsRepository, UserRestConsumer userRestConsumer, FileRestConsumer fileRestConsumer) {
         this.partnershipRepository = partnershipRepository;
         this.socialMediaDetailsRepository = socialMediaDetailsRepository;
         this.userRestConsumer = userRestConsumer;
+        this.fileRestConsumer = fileRestConsumer;
     }
 
     public List<Partnership> getInfluencerPartnerships(Long influencerId) {
@@ -64,9 +67,10 @@ public class PartnershipService {
 
     }
 
-    public void addPartnership(Partnership partnership) {
+    public void addPartnership(Partnership partnership, String token) {
         partnership.setStatus(Status.REQUESTED);
-        partnershipRepository.save(partnership);
+        Long partnershipId = partnershipRepository.save(partnership).getId();
+        fileRestConsumer.uploadFile(partnership.getFile(), partnershipId, token);
     }
 
     public void deletePartnership(Long partnershipId) {

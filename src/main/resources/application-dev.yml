@@ -42,3 +42,5 @@ app:
       url: http://localhost:8888
     auth:
       url: http://localhost:8080
+    file:
+      url: http://localhost:8085
