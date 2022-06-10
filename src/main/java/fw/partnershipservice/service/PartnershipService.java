@@ -68,7 +68,11 @@ public class PartnershipService {
     }
 
     public void addPartnership(Partnership partnership, String token) {
+
         partnership.setStatus(Status.REQUESTED);
+ //       partnership.getSocialMediaDetails().forEach(socialMediaDetail -> {
+  //          socialMediaDetail.setStoryPrice(/*fetch influencer data in var above)*/);
+    //    });
         Long partnershipId = partnershipRepository.save(partnership).getId();
         fileRestConsumer.uploadFile(partnership.getFile(), partnershipId, token);
     }
