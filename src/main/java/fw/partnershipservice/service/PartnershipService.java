@@ -67,7 +67,7 @@ public class PartnershipService {
 
     }
 
-    public Long addPartnership(Partnership partnership, String token) {
+    public Long addPartnership(Partnership partnership) {
 
         partnership.setStatus(Status.REQUESTED);
         Long partnershipId = partnershipRepository.save(partnership).getId();

@@ -31,8 +31,8 @@ public class PartnershipController {
     }
 
     @PostMapping
-    public Long addPartnership(@RequestBody Partnership partnership, @RequestHeader String token) {
-        return partnershipService.addPartnership(partnership, token);
+    public Long addPartnership(@RequestBody Partnership partnership) {
+        return partnershipService.addPartnership(partnership);
     }
 
     @DeleteMapping(path = "{partnershipId}")
