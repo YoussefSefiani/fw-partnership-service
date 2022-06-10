@@ -67,14 +67,12 @@ public class PartnershipService {
 
     }
 
-    public void addPartnership(Partnership partnership, String token) {
+    public Long addPartnership(Partnership partnership, String token) {
 
         partnership.setStatus(Status.REQUESTED);
- //       partnership.getSocialMediaDetails().forEach(socialMediaDetail -> {
-  //          socialMediaDetail.setStoryPrice(/*fetch influencer data in var above)*/);
-    //    });
         Long partnershipId = partnershipRepository.save(partnership).getId();
-        fileRestConsumer.uploadFile(partnership.getFile(), partnershipId, token);
+       // fileRestConsumer.uploadFile(partnership.getFile(), partnershipId, token);
+        return partnershipId;
     }
 
     public void deletePartnership(Long partnershipId) {
