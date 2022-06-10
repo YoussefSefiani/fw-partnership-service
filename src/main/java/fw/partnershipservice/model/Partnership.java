@@ -61,11 +61,11 @@ public class Partnership {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date finishDate;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Transient
-    private MultipartFile file;
+//    @JsonInclude(JsonInclude.Include.NON_NULL)
+//    @Transient
+//    private MultipartFile file;
 
-    public Partnership(Long id, String brandName, String description, Status status, List<SocialMediaDetails> socialMediaDetails, Date startDate, Date endDate, Date finishDate, MultipartFile file) {
+    public Partnership(Long id, String brandName, String description, Status status, List<SocialMediaDetails> socialMediaDetails, Date startDate, Date endDate, Date finishDate) {
         this.id = id;
         this.brandName = brandName;
         this.description = description;
@@ -74,7 +74,6 @@ public class Partnership {
         this.startDate = startDate;
         this.endDate = endDate;
         this.finishDate = finishDate;
-        this.file = file;
     }
 
 }
