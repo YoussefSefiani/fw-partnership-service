@@ -35,8 +35,8 @@ server:
 app:
   services:
     payment:
-      url: https://fw-payment-service.herokuapp.com
+      url: https://fw-payment-service.azurewebsites.net
     auth:
-      url: https://fw-auth-service.herokuapp.com
+      url: https://fw-auth-service.azurewebsites.net
     file:
-      url: https://fw-file-service.herokuapp.com
+      url: https://fw-file-service.azurewebsites.net
